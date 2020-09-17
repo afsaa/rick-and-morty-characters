@@ -1,7 +1,7 @@
 const BASE_URL = "https://rickandmortyapi.com/api";
 
 export async function fetchCharacters(nextPageUrl) {
-  if (nextPageUrl) {
+  if (nextPageUrl && nextPageUrl !== "") {
     return fetch(nextPageUrl)
       .then((res) => {
         return res.json();

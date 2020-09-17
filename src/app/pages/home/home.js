@@ -19,32 +19,6 @@ const loadCharacters = async (nextPageUrl) => {
     charactersContainer.appendChild(noMoreCharactersHeading);
   }
 
-  // First time loading
-  if (nextPageUrl === "") {
-    await fetchCharacters()
-      .then(({ info, results }) => {
-        nextPage = info.next;
-        results.map((character) => {
-          const characterContainer = document.createElement("div");
-          const characterImage = document.createElement("img");
-          const characterName = document.createElement("p");
-
-          characterContainer.setAttribute("class", "character");
-          characterImage.src = character.image;
-          characterImage.setAttribute("key", `${character.id}`);
-          characterImage.setAttribute("class", "img-thumbnail");
-          characterName.innerText = `${character.name}`;
-
-          charactersContainer.appendChild(characterContainer);
-          characterContainer.appendChild(characterImage);
-          characterContainer.appendChild(characterName);
-        });
-      })
-      .catch((err) => {
-        console.error("Error", err);
-      });
-  }
-
   // Loading next page characters
   await fetchCharacters(nextPageUrl)
     .then(({ info, results }) => {
