@@ -3,6 +3,8 @@ import { fetchCharacters } from "../../api/";
 // DOM elements
 const rootElement = document.querySelector("#root");
 const mainHeading = document.createElement("h1");
+const charactersContainer = document.createElement("div");
+charactersContainer.setAttribute("class", "characters__container");
 
 // Info API data
 let nextPage = "";
@@ -14,7 +16,7 @@ const loadCharacters = async (nextPageUrl) => {
     const noMoreCharactersHeading = document.createElement("h3");
     noMoreCharactersHeading.innerHTML = "No hay más personajes!";
     noMoreCharactersHeading.style.textAlign = "center";
-    rootElement.appendChild(noMoreCharactersHeading);
+    charactersContainer.appendChild(noMoreCharactersHeading);
   }
 
   // First time loading
@@ -23,10 +25,19 @@ const loadCharacters = async (nextPageUrl) => {
       .then(({ info, results }) => {
         nextPage = info.next;
         results.map((character) => {
+          const characterContainer = document.createElement("div");
           const characterImage = document.createElement("img");
+          const characterName = document.createElement("p");
+
+          characterContainer.setAttribute("class", "character");
           characterImage.src = character.image;
+          characterImage.setAttribute("key", `${character.id}`);
           characterImage.setAttribute("class", "img-thumbnail");
-          rootElement.appendChild(characterImage);
+          characterName.innerText = `${character.name}`;
+
+          charactersContainer.appendChild(characterContainer);
+          characterContainer.appendChild(characterImage);
+          characterContainer.appendChild(characterName);
         });
       })
       .catch((err) => {
@@ -39,10 +50,19 @@ const loadCharacters = async (nextPageUrl) => {
     .then(({ info, results }) => {
       nextPage = info.next;
       results.map((character) => {
+        const characterContainer = document.createElement("div");
         const characterImage = document.createElement("img");
+        const characterName = document.createElement("p");
+
+        characterContainer.setAttribute("class", "character");
         characterImage.src = character.image;
+        characterImage.setAttribute("key", `${character.id}`);
         characterImage.setAttribute("class", "img-thumbnail");
-        rootElement.appendChild(characterImage);
+        characterName.innerText = `${character.name}`;
+
+        charactersContainer.appendChild(characterContainer);
+        characterContainer.appendChild(characterImage);
+        characterContainer.appendChild(characterName);
       });
     })
     .catch((err) => {
@@ -55,12 +75,13 @@ export const home = () => {
   mainHeading.innerHTML = "Rick & Morty Characters";
   mainHeading.style.textAlign = "center";
   rootElement.appendChild(mainHeading);
+  rootElement.appendChild(charactersContainer);
 
   // Detect when scrolled to bottom.
-  rootElement.addEventListener("scroll", function () {
+  charactersContainer.addEventListener("scroll", function () {
     if (
-      rootElement.scrollTop + rootElement.clientHeight >=
-      rootElement.scrollHeight - 200
+      charactersContainer.scrollTop + charactersContainer.clientHeight >=
+      charactersContainer.scrollHeight - 200
     ) {
       loadCharacters(nextPage);
     }
