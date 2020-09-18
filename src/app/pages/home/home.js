@@ -16,15 +16,17 @@ const home = async () => {
   <div id="home">
     <h1>Rick & Morty Characters</h1>
       <div class="characters__container">
-        ${characters.results.map(
-          (character) =>
-            `<article class="character">
+        ${characters.results
+          .map(
+            (character) =>
+              `<article class="character">
               <a href="#/${character.id}">
                 <img src=${character.image} alt=${character.name} class="img-thumbnail" />
                 <h2>${character.name}</h2>
               </a>
             </article>`
-        )}
+          )
+          .join("")}
       </div>
   </div>
   `;
