@@ -19,11 +19,6 @@ p {
   line-height: 200%;
 }
 
-a:hover {
-  color: $text-primary;
-  border-bottom: 1px $text-primary solid;
-}
-
 .active {
   border-bottom: 1px $text-primary solid;
 }
@@ -37,6 +32,10 @@ body {
   color: $text-primary;
 }
 
+#home > h1 {
+  text-align: center;
+}
+
 .characters__container {
   display: flex;
   justify-content: center;
@@ -46,13 +45,17 @@ body {
   overflow: auto;
 }
 
-.character > img {
+.character a {
+  text-decoration: none;
+  text-align: center;
+}
+
+.character a > img {
   margin: 10px;
   opacity: 0.5;
   background-color: $text-primary;
   transition: 500ms;
   &:hover {
-    cursor: pointer;
     opacity: 1;
   }
 }

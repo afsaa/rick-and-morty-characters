@@ -6,7 +6,8 @@
   "author": "Andrés Fernando Saa",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --inline --progress"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --mode development"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

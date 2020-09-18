@@ -1,9 +1,10 @@
-import { home } from "@pages/home";
+import router from "../app/routes";
 
 import "@styles/main.scss";
 
 const App = () => {
-  home();
+  window.addEventListener("load", router);
+  window.addEventListener("hashchange", router);
 };
 
 App();
